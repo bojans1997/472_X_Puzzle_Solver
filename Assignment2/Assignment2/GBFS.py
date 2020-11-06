@@ -162,7 +162,7 @@ def gbfs(heuristic = 1):
         closed_list = []
         test = 0
         while not open_list.empty():
-            if time.time() > timeout:
+            if time.time() - start_time > timeout:
                 break
             test += 1
             current_state = open_list.get()
