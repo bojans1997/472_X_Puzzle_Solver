@@ -1,4 +1,7 @@
 #Each movement is a different board.
+import UCSBoard as board  
+import UCSNodes as nodes
+
 """
 The χ-Puzzle is a type of sliding-puzzle played on a wrapping board. The rules of the χ-Puzzle are the following:
 1. The puzzle is an 2 × 4 board with 8 tiles (7 numbered and 1 empty).
@@ -27,10 +30,13 @@ def savePuzzles():
     print("Completed puzzle tree")
     return puzzleList
 
-print("Generating puzzle tree")
+#parameter are rows and col integers
+def generatePuzzleBoard(rows, cols):
+    print("yeet")
+
+print("Generating puzzle list")
 puzzleList = []
 puzzleList = savePuzzles()
 print(puzzleList)
 
-
-
+currentBoard = board.UCSBoard(2,4,puzzleList)

@@ -24,6 +24,9 @@
     <Compile Include="AlgorithmA.py" />
     <Compile Include="GBFS.py" />
     <Compile Include="UCS.py" />
+    <Compile Include="UCSBoard.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="UCSNodes.py">
       <SubType>Code</SubType>
     </Compile>
