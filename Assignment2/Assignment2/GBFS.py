@@ -3,7 +3,6 @@ import time
 
 timeout = time.time() + 60
 
-puzzle_file = open("Resources/testpuzzle.txt")
 puzzles = []
 with open('Resources/testpuzzle.txt') as f:
     for line in f:
