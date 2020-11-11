@@ -3,7 +3,6 @@ import time
 
 timeout = time.time() + 60
 
-puzzle_file = open("Resources/testpuzzle.txt")
 puzzles = []
 with open('Resources/testpuzzle.txt') as f:
     for line in f:
@@ -219,7 +218,7 @@ def gbfs(heuristic = 1):
             for state in closed_list:
                 fn = str(0) + " "
                 gn = str(0) + " "
-                hn = str(state[1][2]) + " "
+                hn = str(state[0]) + " "
                 st = ""
                 for i in state[1][0]:
                     st += str(i) + " "
@@ -234,4 +233,4 @@ def gbfs(heuristic = 1):
             f.write("No solution")
             f.close()
 
-gbfs(2)
+gbfs(1)
