@@ -151,9 +151,6 @@ def getNeighborStates(list):
             new_state = initial_list.copy()
     return neighbor_states
 
-#parameter are rows and col integers
-def generatePuzzleBoard(rows, cols):
-    print("yeet")
 
     """
     Repeat following:
@@ -204,12 +201,26 @@ def ucs():
                         break
                     #check if it was a visited state
                     if state[0] in dupe_check:
-
-#                        for open_state in open_list:
-#                            if open_state == state[0]:
-#                                print("Replace the one in open list by this one")
                         found = True
                         break
+                        tempList = []
+                        temp_openList = open_list
+                        while not temp_openList.empty():
+                            itemToSave = temp_openList.get()
+                            tempList.append(itemToSave)
+                            isRemovingItem = False
+                            for item in tempList:
+                                if state[0] == item[1][0]:
+                                    if state[2]+current_state[0] < item[0]:
+                                        itemToRemove = item
+                                        isRemovingItem = True
+                                        found = True
+                                        priority = state[2] + current_state[0]
+                                        open_list.put((priority, state))
+                                        dupe_check.append(state[0])
+                            if isRemovingItem:
+                                tempList.remove(itemToRemove)
+                                open_list = temp_openList
                     if not found:
                         priority = state[2] + current_state[0]
                         open_list.put((priority, state))
