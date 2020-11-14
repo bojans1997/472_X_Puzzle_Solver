@@ -186,7 +186,6 @@ def algorithmA(heuristic=1):
                         # check if it was a visited state
                     if state[0] in dupe_check:
                         found = True
-                        break
                         tempList = []
                         temp_openList = open_list
                         while not temp_openList.empty():
