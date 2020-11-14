@@ -2,6 +2,7 @@ from queue import PriorityQueue
 import time
 
 timeout = time.time() + 60
+
 puzzles = []
 with open('../../Downloads/472_Assignment2-Sunny 2/Assignment2/Assignment2/Resources/testpuzzle.txt') as f:
     for line in f:
@@ -198,29 +199,29 @@ def algorithmA(heuristic=1):
                                         itemToRemove = item
                                         isRemovingItem = True
                                         found = True
-                                        priority1 = state[2] + current_state[0]
+                                        g = state[2] + current_state[0]
                                         if (heuristic == 0):
-                                            priority2 = getDemoHeuristic(state[0])
+                                            h = getDemoHeuristic(state[0])
                                         elif (heuristic == 1):
-                                            priority2 = getFirstHeuristic(state[0])
+                                            h = getFirstHeuristic(state[0])
                                         else:
-                                            priority2 = getSecondHeuristic(state[0])
-                                        priority = priority1 + priority2
-                                        open_list.put((priority, state))
+                                            h = getSecondHeuristic(state[0])
+                                        priority = g + h
+                                        open_list.put((priority, state, g, h))
                                         dupe_check.append(state[0])
                            if isRemovingItem:
                                 tempList.remove(itemToRemove)
                                 open_list = temp_openList
                     if not found:
-                        priority1 = state[2] + current_state[0]
+                        g = state[2] + current_state[0]
                         if (heuristic == 0):
-                            priority2 = getDemoHeuristic(state[0])
+                            h = getDemoHeuristic(state[0])
                         elif (heuristic == 1):
-                            priority2 = getFirstHeuristic(state[0])
+                            h = getFirstHeuristic(state[0])
                         else:
-                            priority2 = getSecondHeuristic(state[0])
-                        priority = priority1 + priority2
-                        open_list.put((priority, state))
+                            h = getSecondHeuristic(state[0])
+                        priority = g + h
+                        open_list.put((priority, state, g, h))
                         dupe_check.append(state[0])
 
         # write solution steps to file
@@ -250,9 +251,9 @@ def algorithmA(heuristic=1):
             # write search path to file
             f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_search.txt", "w")
             for state in closed_list:
-                fn = str(0) + " "
-                gn = str(0) + " "
-                hn = str(state[0]) + " "
+                fn = str(state[0]) + " "
+                gn = str(state[2]) + " "
+                hn = str(state[3]) + " "
                 st = ""
                 for i in state[1][0]:
                     st += str(i) + " "
