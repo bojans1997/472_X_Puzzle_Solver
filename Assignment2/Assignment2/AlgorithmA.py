@@ -239,7 +239,7 @@ def algorithmA(heuristic=1):
                         total_cost += closed_state[1][2]
 
                 solution_path.append(full_state)
-            f = open(str(puzzle_num) + "_gbfs-h" + str(heuristic) + "_solution.txt", "w")
+            f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_solution.txt", "w")
             for solution_state in reversed(solution_path):
                 st = ""
                 for i in solution_state[1][0]:
@@ -249,7 +249,7 @@ def algorithmA(heuristic=1):
             f.write("Total cost: " + str(total_cost) + " Execution time: " + str(time.time() - start_time))
             f.close()
             # write search path to file
-            f = open(str(puzzle_num) + "_gbfs-h" + str(heuristic) + "_search.txt", "w")
+            f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_search.txt", "w")
             for state in closed_list:
                 fn = str(0) + " "
                 gn = str(0) + " "
@@ -261,13 +261,15 @@ def algorithmA(heuristic=1):
                 f.write("\n")
             f.close()
         else:
-            f = open(str(puzzle_num) + "_gbfs-h" + str(heuristic) + "_solution.txt", "w")
+            f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_solution.txt", "w")
             f.write("No solution")
             f.close()
-            f = open(str(puzzle_num) + "_gbfs-h" + str(heuristic) + "_search.txt", "w")
+            f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_search.txt", "w")
             f.write("No solution")
             f.close()
-            
+
 algorithmA(1)
+
+
 
 
