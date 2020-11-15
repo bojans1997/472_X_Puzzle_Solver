@@ -35,7 +35,7 @@ are more expensive than regular moves, and have a cost of 3.
 5. The goal of the puzzle is to reach either one of the 2 goals below with the lowest cost.
 
 """
-puzzle_file = open("Resources/testpuzzle.txt")
+puzzle_file = open("Resources/sampleBoards.txt")
 puzzles = []
 with open('Resources/sampleBoards.txt') as f:
     for line in f:
@@ -189,6 +189,7 @@ def ucs():
             #check if it is target
             if current_state[1][0] == target_state[0] or current_state[1][0] == target_state[1]:
                 solution_found = True
+                print("solution found")
                 break
             #get all possible moves from this state
             neighbor_states = getNeighborStates(current_state[1])
@@ -202,25 +203,22 @@ def ucs():
                     #check if it was a visited state
                     if state[0] in dupe_check:
                         found = True
-                        break
                         tempList = []
-                        temp_openList = open_list
-                        while not temp_openList.empty():
-                            itemToSave = temp_openList.get()
-                            tempList.append(itemToSave)
-                            isRemovingItem = False
-                            for item in tempList:
-                                if state[0] == item[1][0]:
-                                    if state[2]+current_state[0] < item[0]:
-                                        itemToRemove = item
-                                        isRemovingItem = True
-                                        found = True
-                                        priority = state[2] + current_state[0]
-                                        open_list.put((priority, state))
-                                        dupe_check.append(state[0])
-                            if isRemovingItem:
-                                tempList.remove(itemToRemove)
-                                open_list = temp_openList
+                        foundBetterPath = False
+                        while not open_list.empty():
+                            itemToSave = open_list.get()
+                            if itemToSave[0] > state[2] + current_state[0]:
+                                foundBetterPath = True
+                                break
+                            else:
+                                tempList.append(itemToSave)
+                        if foundBetterPath:
+                            priority = state[2] + current_state[0]
+                            open_list.put((priority, state))
+
+                        for item in tempList:
+                            open_list.put((item[0], item[1]))
+
                     if not found:
                         priority = state[2] + current_state[0]
                         open_list.put((priority, state))
@@ -230,6 +228,7 @@ def ucs():
         # write solution steps to file
         puzzle_num += 1
         if solution_found:
+            print("Starting write to file")
             total_cost = 0
             solution_path = []
             parent = closed_list[-1][1][0]
