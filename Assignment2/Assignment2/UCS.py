@@ -164,14 +164,16 @@ def ucs():
 
             for state in neighbor_states:
                 found = False
+                isDupeRemoved = False
                 for closed_state in closed_list:
                     if closed_state[1][0] == state[0]:
                         found = True
                         if state[0] in dupe_check:
                             dupe_check.remove(state[0])
+                            isDupeRemoved = True
                         break
                     #check if it was a visited state
-                if state[0] in dupe_check:
+                if state[0] in dupe_check and not isDupeRemoved:
                     found = True
                     tempList = []
                     foundBetterPath = False
