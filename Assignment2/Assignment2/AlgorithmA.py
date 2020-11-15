@@ -4,7 +4,7 @@ import time
 timeout = 60
 
 puzzles = []
-with open('../../Resources/testpuzzle.txt') as f:
+with open('Resources/testpuzzle.txt') as f:
     for line in f:
         puzzles.append([int(i) for i in line.split()])
 
@@ -251,8 +251,8 @@ def algorithmA(heuristic=1):
             f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_search.txt", "w")
             for state in closed_list:
                 fn = str(state[0]) + " "
-                gn = str(state[2]) + " "
-                hn = str(state[3]) + " "
+                gn = str(0) + " "
+                hn = str(0) + " "
                 st = ""
                 for i in state[1][0]:
                     st += str(i) + " "
@@ -268,7 +268,5 @@ def algorithmA(heuristic=1):
             f.close()
 
 algorithmA(1)
-
-
 
 
