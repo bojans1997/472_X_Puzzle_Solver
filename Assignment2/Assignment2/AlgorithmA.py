@@ -182,36 +182,22 @@ def algorithmA(heuristic=1):
                 for closed_state in closed_list:
                     if closed_state[1][0] == state[0]:
                         found = True
+                        if state[0] in dupe_check:
+                            dupe_check.remove(state[0])
                         break
                         # check if it was a visited state
-                    if state[0] in dupe_check:
-                        found = True
-                        tempList = []
-                        temp_openList = open_list
-                        while not temp_openList.empty():
-                           itemToSave = temp_openList.get()
-                           tempList.append(itemToSave)
-                           isRemovingItem = False
-                           for item in tempList:
-                                if state[0] == item[1][0]:
-                                     if state[2] + current_state[0] < item[0]:
-                                        itemToRemove = item
-                                        isRemovingItem = True
-                                        found = True
-                                        g = state[2] + current_state[0]
-                                        if (heuristic == 0):
-                                            h = getDemoHeuristic(state[0])
-                                        elif (heuristic == 1):
-                                            h = getFirstHeuristic(state[0])
-                                        else:
-                                            h = getSecondHeuristic(state[0])
-                                        priority = g + h
-                                        open_list.put((priority, state, g, h))
-                                        dupe_check.append(state[0])
-                           if isRemovingItem:
-                                tempList.remove(itemToRemove)
-                                open_list = temp_openList
-                    if not found:
+                if state[0] in dupe_check:
+                    found = True
+                    tempList = []
+                    foundBetterPath = False
+                    while not open_list.empty():
+                        itemToSave = open_list.get()
+                        if state[0] == itemToSave[1][0] and itemToSave[0] > state[2] + current_state[0]:
+                            foundBetterPath = True
+                            break
+                        else:
+                            tempList.append(itemToSave)
+                    if foundBetterPath:
                         g = state[2] + current_state[0]
                         if (heuristic == 0):
                             h = getDemoHeuristic(state[0])
@@ -221,7 +207,21 @@ def algorithmA(heuristic=1):
                             h = getSecondHeuristic(state[0])
                         priority = g + h
                         open_list.put((priority, state, g, h))
-                        dupe_check.append(state[0])
+
+                    for item in tempList:
+                        open_list.put((item[0], item[1]))
+
+                if not found:
+                    g = state[2] + current_state[0]
+                    if (heuristic == 0):
+                        h = getDemoHeuristic(state[0])
+                    elif (heuristic == 1):
+                        h = getFirstHeuristic(state[0])
+                    else:
+                        h = getSecondHeuristic(state[0])
+                    priority = g + h
+                    open_list.put((priority, state, g, h))
+                    dupe_check.append(state[0])
 
         # write solution steps to file
         puzzle_num += 1
