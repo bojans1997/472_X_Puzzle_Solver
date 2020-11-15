@@ -251,8 +251,8 @@ def algorithmA(heuristic=1):
             f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_search.txt", "w")
             for state in closed_list:
                 fn = str(state[0]) + " "
-                gn = str(0) + " "
-                hn = str(0) + " "
+                gn = str(state[2]) + " "
+                hn = str(state[3]) + " "
                 st = ""
                 for i in state[1][0]:
                     st += str(i) + " "
