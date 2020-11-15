@@ -180,7 +180,6 @@ def ucs():
                 break
             test += 1
             current_state = open_list.get()
-            print(current_state)
             #move current state to closed list
             closed_list.append(current_state)
             #check if it is target
@@ -193,6 +192,7 @@ def ucs():
 
             for state in neighbor_states:
                 found = False
+                ignoreDupeCheck = False;
                 for closed_state in closed_list:
                     if closed_state[1][0] == state[0]:
                         found = True
@@ -223,11 +223,9 @@ def ucs():
                     open_list.put((priority, state))
                     dupe_check.append(state[0])
 
-
         # write solution steps to file
         puzzle_num += 1
         if solution_found:
-            print("Starting write to file")
             total_cost = 0
             solution_path = []
             parent = closed_list[-1][1][0]
@@ -253,15 +251,16 @@ def ucs():
             f = open(str(puzzle_num) + "_ucs-h" + "_search.txt", "w")
             for state in closed_list:
                 fn = str(0) + " "
-                gn = str(0) + " "
+                gn = str(state[0]) + " "
+                hn = str(0) + " "
                 st = ""
                 for i in state[1][0]:
                     st += str(i) + " "
-                f.write(fn + gn + st)
+                f.write(fn + gn + hn + st)
                 f.write("\n")
             f.close()
         else:
-            f = open(str(puzzle_num) + "_ucs-h" +  "_solution.txt", "w")
+            f = open(str(puzzle_num) + "_ucs-h" + "_solution.txt", "w")
             f.write("No solution")
             f.close()
             f = open(str(puzzle_num) + "_ucs-h" + "_search.txt", "w")
