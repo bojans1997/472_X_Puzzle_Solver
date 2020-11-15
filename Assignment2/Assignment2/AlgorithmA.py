@@ -4,7 +4,7 @@ import time
 timeout = 60
 
 puzzles = []
-with open('../../Downloads/472_Assignment2-Sunny 2/Assignment2/Assignment2/Resources/testpuzzle.txt') as f:
+with open('../../Resources/testpuzzle.txt') as f:
     for line in f:
         puzzles.append([int(i) for i in line.split()])
 
