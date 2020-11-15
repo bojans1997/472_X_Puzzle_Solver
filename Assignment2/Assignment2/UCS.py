@@ -1,10 +1,6 @@
 from queue import PriorityQueue
 import time
 
-#Each movement is a different board.
-import UCSBoard as board  
-import UCSNodes as nodes
-
 timeout = time.time() + 60
 
 """
@@ -184,6 +180,7 @@ def ucs():
                 break
             test += 1
             current_state = open_list.get()
+            print(current_state)
             #move current state to closed list
             closed_list.append(current_state)
             #check if it is target
@@ -199,30 +196,32 @@ def ucs():
                 for closed_state in closed_list:
                     if closed_state[1][0] == state[0]:
                         found = True
+                        if state[0] in dupe_check:
+                            dupe_check.remove(state[0])
                         break
                     #check if it was a visited state
-                    if state[0] in dupe_check:
-                        found = True
-                        tempList = []
-                        foundBetterPath = False
-                        while not open_list.empty():
-                            itemToSave = open_list.get()
-                            if itemToSave[0] > state[2] + current_state[0]:
-                                foundBetterPath = True
-                                break
-                            else:
-                                tempList.append(itemToSave)
-                        if foundBetterPath:
-                            priority = state[2] + current_state[0]
-                            open_list.put((priority, state))
-
-                        for item in tempList:
-                            open_list.put((item[0], item[1]))
-
-                    if not found:
+                if state[0] in dupe_check:
+                    found = True
+                    tempList = []
+                    foundBetterPath = False
+                    while not open_list.empty():
+                        itemToSave = open_list.get()
+                        if state[0] == itemToSave[1][0] and itemToSave[0] > state[2] + current_state[0]:
+                            foundBetterPath = True
+                            break
+                        else:
+                            tempList.append(itemToSave)
+                    if foundBetterPath:
                         priority = state[2] + current_state[0]
                         open_list.put((priority, state))
-                        dupe_check.append(state[0])
+
+                    for item in tempList:
+                        open_list.put((item[0], item[1]))
+
+                if not found:
+                    priority = state[2] + current_state[0]
+                    open_list.put((priority, state))
+                    dupe_check.append(state[0])
 
 
         # write solution steps to file
