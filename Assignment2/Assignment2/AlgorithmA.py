@@ -161,7 +161,7 @@ def algorithmA(heuristic=1):
         num_moves = 0
 
         open_list = PriorityQueue()
-        open_list.put((0, [current_state, previous_state, 0, 0]))
+        open_list.put((0, [current_state, previous_state, 0, 0], 0, 0))
         dupe_check = [current_state]
         closed_list = []
         test = 0
@@ -209,7 +209,7 @@ def algorithmA(heuristic=1):
                         open_list.put((priority, state, g, h))
 
                     for item in tempList:
-                        open_list.put((item[0], item[1]))
+                        open_list.put((item[0], item[1], item[2], item[3]))
 
                 if not found:
                     g = state[2] + current_state[0]
@@ -268,5 +268,4 @@ def algorithmA(heuristic=1):
             f.close()
 
 algorithmA(1)
-
 
