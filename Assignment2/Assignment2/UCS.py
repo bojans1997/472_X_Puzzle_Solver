@@ -3,34 +3,6 @@ import time
 
 timeout = time.time() + 60
 
-"""
-UCS algo
-
-Null -> Expand all children 
-
-Repeat following:
-    Sort PQ <-- automatically done by python
-    If 2 nodes have same costs, just choose an arbitary one to put as first
-     is it goal state? if no = continue, else end.
-    Expand first one in queue.
-   
-        If you find a shorter path waiting in open list, replace with a new shorter path in PQ
-   
-The χ-Puzzle is a type of sliding-puzzle played on a wrapping board. The rules of the χ-Puzzle are the following:
-1. The puzzle is an 2 × 4 board with 8 tiles (7 numbered and 1 empty).
-
-2. Regular moves: Regular horizontal and vertical moves of sliding-puzzles are allowed and have a cost of 1.
-
-3. Wrapping moves: If the empty tile is at a corner position, then the numbered tile at the other end of the
-same row can slide into it. These moves are more expensive than regular moves, and have a cost of 2.
-
-4. Diagonal moves: If the empty tile is at a corner position, then the numbered tile diagonally adjacent to it
-inside the board, as well as the numbered tile in the opposed corner can be moved into it. These moves
-are more expensive than regular moves, and have a cost of 3.
-
-5. The goal of the puzzle is to reach either one of the 2 goals below with the lowest cost.
-
-"""
 puzzle_file = open("Resources/sampleBoards.txt")
 puzzles = []
 with open('Resources/sampleBoards.txt') as f:
@@ -192,7 +164,6 @@ def ucs():
 
             for state in neighbor_states:
                 found = False
-                ignoreDupeCheck = False;
                 for closed_state in closed_list:
                     if closed_state[1][0] == state[0]:
                         found = True
