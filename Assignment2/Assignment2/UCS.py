@@ -255,11 +255,10 @@ def ucs():
             for state in closed_list:
                 fn = str(0) + " "
                 gn = str(0) + " "
-                hn = str(state[1][2]) + " "
                 st = ""
                 for i in state[1][0]:
                     st += str(i) + " "
-                f.write(fn + gn + hn + st)
+                f.write(fn + gn + st)
                 f.write("\n")
             f.close()
         else:
