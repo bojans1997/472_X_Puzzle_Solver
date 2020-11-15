@@ -1,7 +1,7 @@
 from queue import PriorityQueue
 import time
 
-timeout = time.time() + 60
+timeout = 60
 
 puzzle_file = open("Resources/sampleBoards.txt")
 puzzles = []
@@ -149,6 +149,7 @@ def ucs():
 
         while not open_list.empty():
             if time.time() - start_time > timeout:
+
                 break
             test += 1
             current_state = open_list.get()
