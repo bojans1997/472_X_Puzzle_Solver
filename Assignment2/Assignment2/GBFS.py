@@ -126,25 +126,53 @@ def getDemoHeuristic(state):
     else:
         return 1
 
-# count how many tiles are in the wrong position relative to solution 1
+# count how many tiles are in the wrong position relative to both solutions, and return the lowest value
 def getFirstHeuristic(state):
     misplacedTiles = 0
     index = 0
+    firstCost = 0
     for num in state:
         if state[index] != target_state[0][index]:
             misplacedTiles += 1
         index += 1
-    return misplacedTiles
+    firstCost = misplacedTiles
 
-# count how many tiles are in the wrong position relative to solution 2
-def getSecondHeuristic(state):
     misplacedTiles = 0
     index = 0
     for num in state:
         if state[index] != target_state[1][index]:
             misplacedTiles += 1
         index += 1
-    return misplacedTiles
+    if misplacedTiles < firstCost:
+        return misplacedTiles
+    else:
+        return firstCost
+
+# count number of tiles in wrong row relative to both solutions, and return the lowest value
+def getSecondHeuristic(state):
+    wrongRow = 0
+    index = 0
+    firstCost = 0
+    for num in state:
+        if num > 0 and num <= 4 and index > 3:
+            wrongRow += 1
+        elif (num == 0 or num > 4) and index <= 3:
+            wrongRow += 1
+        index += 1
+    firstCost = wrongRow
+
+    wrongRow = 0
+    index = 0
+    for num in state:
+        if (num == 1 or num == 3 or num == 5 or num == 7) and index > 3:
+            wrongRow += 1
+        elif (num == 2 or num == 4 or num == 6 or num == 0) and index <= 3:
+            wrongRow += 1
+        index += 1
+    if wrongRow < firstCost:
+        return wrongRow
+    else:
+        return firstCost
 
 def gbfs(heuristic = 1):
     puzzle_num = -1
@@ -233,4 +261,4 @@ def gbfs(heuristic = 1):
             f.write("No solution")
             f.close()
 
-gbfs(1)
+gbfs(0)

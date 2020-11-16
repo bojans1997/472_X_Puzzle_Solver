@@ -8,7 +8,6 @@ puzzles = []
 with open('Resources/sampleBoards.txt') as f:
     for line in f:
         puzzles.append([int(i) for i in line.split()])
-print(puzzles)
 
 target_state = [[1,2,3,4,5,6,7,0], [1,3,5,7,2,4,6,0]]
 
@@ -158,7 +157,6 @@ def ucs():
             #check if it is target
             if current_state[1][0] == target_state[0] or current_state[1][0] == target_state[1]:
                 solution_found = True
-                print("solution found")
                 break
             #get all possible moves from this state
             neighbor_states = getNeighborStates(current_state[1])
