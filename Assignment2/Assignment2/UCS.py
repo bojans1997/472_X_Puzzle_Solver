@@ -221,7 +221,7 @@ def ucs():
                         total_cost += closed_state[1][2]
                 
                 solution_path.append(full_state)
-            f = open("UCS-results/" + str(puzzle_num) + "_ucs-h" + "_solution.txt", "w")
+            f = open("UCS-results/" + str(puzzle_num) + "_ucs" + "_solution.txt", "w")
             for solution_state in reversed(solution_path):
                 st = ""
                 for i in solution_state[1][0]:
@@ -234,7 +234,7 @@ def ucs():
             total_solution_path += len(solution_path)
             total_search_path += len(closed_list)
             # write search path to file
-            f = open("UCS-results/" + str(puzzle_num) + "_ucs-h" + "_search.txt", "w")
+            f = open("UCS-results/" + str(puzzle_num) + "_ucs" + "_search.txt", "w")
             for state in closed_list:
                 fn = str(0) + " "
                 gn = str(state[0]) + " "
@@ -246,10 +246,10 @@ def ucs():
                 f.write("\n")
             f.close()
         else:
-            f = open("UCS-results/" + str(puzzle_num) + "_ucs-h" + "_solution.txt", "w")
+            f = open("UCS-results/" + str(puzzle_num) + "_ucs" + "_solution.txt", "w")
             f.write("No solution")
             f.close()
-            f = open("UCS-results/" + str(puzzle_num) + "_ucs-h" + "_search.txt", "w")
+            f = open("UCS-results/" + str(puzzle_num) + "_ucs" + "_search.txt", "w")
             f.write("No solution")
             f.close()
             total_no_solution += 1
