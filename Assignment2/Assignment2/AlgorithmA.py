@@ -3,8 +3,14 @@ import time
 
 timeout = 60
 
+total_solution_path = 0
+total_search_path = 0
+total_no_solution = 0
+total_final_cost = 0
+total_execution_time = time.time()
+
 puzzles = []
-with open('Resources/testpuzzle.txt') as f:
+with open('Resources/50puzzles.txt') as f:
     for line in f:
         puzzles.append([int(i) for i in line.split()])
 
@@ -179,6 +185,13 @@ def getSecondHeuristic(state):
 
 
 def algorithmA(heuristic=1):
+    global timeout
+    global total_solution_path
+    global total_search_path
+    global total_no_solution
+    global total_final_cost
+    global total_execution_time
+
     puzzle_num = -1
     for puzzle in puzzles:
         start_time = time.time()
@@ -265,7 +278,7 @@ def algorithmA(heuristic=1):
                         total_cost += closed_state[1][2]
 
                 solution_path.append(full_state)
-            f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_solution.txt", "w")
+            f = open("Astar-results/" + str(puzzle_num) + "_astar-h" + str(heuristic) + "_solution.txt", "w")
             for solution_state in reversed(solution_path):
                 st = ""
                 for i in solution_state[1][0]:
@@ -274,8 +287,11 @@ def algorithmA(heuristic=1):
                 f.write("\n")
             f.write("Total cost: " + str(total_cost) + " Execution time: " + str(time.time() - start_time))
             f.close()
+            total_final_cost += total_cost
+            total_solution_path += len(solution_path)
+            total_search_path += len(closed_list)
             # write search path to file
-            f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_search.txt", "w")
+            f = open("Astar-results/" + str(puzzle_num) + "_astar-h" + str(heuristic) + "_search.txt", "w")
             for state in closed_list:
                 fn = str(state[0]) + " "
                 gn = str(state[2]) + " "
@@ -287,11 +303,24 @@ def algorithmA(heuristic=1):
                 f.write("\n")
             f.close()
         else:
-            f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_solution.txt", "w")
+            f = open("Astar-results/" + str(puzzle_num) + "_astar-h" + str(heuristic) + "_solution.txt", "w")
             f.write("No solution")
             f.close()
-            f = open(str(puzzle_num) + "_algoA-h" + str(heuristic) + "_search.txt", "w")
+            f = open("Astar-results/" + str(puzzle_num) + "_astar-h" + str(heuristic) + "_search.txt", "w")
             f.write("No solution")
             f.close()
+            total_no_solution += 1
 
 algorithmA(1)
+
+total_execution_time = time.time() - total_execution_time
+
+print("avg solution length: " + str(total_solution_path / 50))
+print("total solution length: " + str(total_solution_path))
+print("avg search length: " + str(total_search_path / 50))
+print("total search length: " + str(total_search_path))
+print("total no solution: " + str(total_no_solution))
+print("avg cost: " + str(total_final_cost / 50))
+print("total cost: " + str(total_final_cost))
+print("avg execution time: " + str(total_execution_time / 50))
+print("total execution time: " + str(total_execution_time))
