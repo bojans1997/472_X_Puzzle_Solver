@@ -1,7 +1,7 @@
 from queue import PriorityQueue
 import time
 
-timeout = time.time() + 60
+timeout = 60
 
 puzzles = []
 with open('Resources/testpuzzle.txt') as f:

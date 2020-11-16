@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>e4abba24-a37e-4c3c-ac03-c71afac31b00</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>UCS.py</StartupFile>
+    <StartupFile>GBFS.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,12 +23,17 @@
   <ItemGroup>
     <Compile Include="AlgorithmA.py" />
     <Compile Include="GBFS.py" />
+    <Compile Include="randomizer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="UCS.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="0_gbfs-h1_search.txt" />
+    <Content Include="1_gbfs-h1_search.txt" />
     <Content Include="Resources\testpuzzle.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
