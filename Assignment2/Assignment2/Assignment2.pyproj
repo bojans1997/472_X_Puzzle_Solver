@@ -26,14 +26,20 @@
     <Compile Include="randomizer.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ScaledGBFS.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="UCS.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Astar-results\" />
+    <Folder Include="GBFS-results\" />
     <Folder Include="Resources\" />
+    <Folder Include="ScaledGBFS-results\" />
+    <Folder Include="UCS-results\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="0_gbfs-h1_search.txt" />
-    <Content Include="1_gbfs-h1_search.txt" />
+    <Content Include="Resources\50puzzles.txt" />
     <Content Include="Resources\testpuzzle.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
