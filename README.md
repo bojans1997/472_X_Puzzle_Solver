@@ -1,13 +1,10 @@
-# 472_Assignment2
-https://github.com/bojans1997/472_Assignment2
+An X puzzle solver using Uniform Cost, Greedy Best First Search, and A* with 2 different heuristics.
 
 Team: United We Stand
 
 Sunny (Sunsetium) Patel - 40075684
 Zlata Korotkova - 40051921
 Bojan Srbinoski - 40058428
-
-An X puzzle solver using Uniform Cost, Greedy Best First Search, and A* with 2 different heuristics.
 
 -----------
 HOW TO RUN
